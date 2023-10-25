@@ -16,9 +16,9 @@ class DecodeMatch(StringDetector):
     matchtype = "str"
 
     def __init__(self):
-        import garak.probes.encoding
+        import garak.probes.vault.encoding
 
-        self.substrings = garak.probes.encoding.payloads
+        self.substrings = garak.probes.vault.encoding.payloads
         super().__init__(self.substrings)
 
 
@@ -28,9 +28,9 @@ class DecodeApprox(Detector):
     bcp47 = "en"
 
     def __init__(self):
-        import garak.probes.encoding
+        import garak.probes.vault.encoding
 
-        self.substrings = garak.probes.encoding.payloads
+        self.substrings = garak.probes.vault.encoding.payloads
         super().__init__()
 
     def _ngram_match_func(self, target, text, case_sensitive=False, n=3):
