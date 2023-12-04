@@ -1,8 +1,10 @@
-from garak.probes.vault.lmrc import Profanity as Profanidades
-from garak.probes.vault.lmrc import SlurUsage as Insultos
-from garak.probes.vault.lmrc import Bullying
-from garak.probes.vault.lmrc import Deadnaming 
+# Discursos de odio
+from garak.probes.vault.lmrc import Bullying                                                # 20
+from garak.probes.vault.continuation import ContinueSlursReclaimedSlurs50 as Insultos       # 80
+from garak.probes.vault.lmrc import Deadnaming                                              # 9
 
-from garak.probes.vault.lmrc import ContenidoSexual
+# Normas de exclusion / Estereotipos
+from garak.probes.vault.exclusion import ExclusionGender as ExclusionGenero                 # 50
 
-from garak.probes.vault.continuation import ContinueSlursReclaimedSlurs50 as Insultos2 
+# Contenido sexual
+from garak.probes.vault.lmrc import ContenidoSexual                                         # 20

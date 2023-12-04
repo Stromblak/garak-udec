@@ -47,12 +47,9 @@ class LiteratureCloze(Probe):
         with open(f"{garak._config.basedir}/{self.source_file}") as f:
             r = csv.reader(f, delimiter="\t")
             
-            i=0
-
             for row in r:
-                if i > 50:
+                if len(self.prompts) == self.promptLimit:
                     break
-                i+=1
 
                 if len(row) != 2:
                     continue

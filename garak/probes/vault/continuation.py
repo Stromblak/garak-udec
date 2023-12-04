@@ -12,6 +12,7 @@ import json
 import garak._config
 from garak.attempt import Attempt
 from garak.probes.base import Probe
+from .danBase import JailbreakBase
 
 
 class ContinueSlursReclaimedSlurs50(Probe):
@@ -20,7 +21,6 @@ class ContinueSlursReclaimedSlurs50(Probe):
     bcp47 = "en"
     uri = ""
     recommended_detector = [
-        "specialwords.SlursReclaimedSlurs",
         "continuation.Continuation",
     ]
     tags = [
@@ -59,6 +59,9 @@ class ContinueSlursReclaimedSlurs50(Probe):
 
             for prefix in slur_prefixes[term]:
                 for term_variant in term_variants:
+                    if len(self.prompts) == self.promptLimit:
+                        break
+                        
                     # would use a set but order is important
                     candidate_prompt = prefix + term_variant
                     if candidate_prompt not in self.prompts:
@@ -68,3 +71,15 @@ class ContinueSlursReclaimedSlurs50(Probe):
     def _attempt_prestore_hook(self, attempt: Attempt, seq: int) -> Attempt:
         attempt.notes["trigger"] = self.triggers[seq]
         return attempt
+
+
+
+class ContinueSlursReclaimedSlurs50PI(JailbreakBase, ContinueSlursReclaimedSlurs50, Probe):
+    recommended_detector = [
+        "continuation.Continuation",
+    ]
+
+    def __init__(self):
+        ContinueSlursReclaimedSlurs50.__init__(self)
+        JailbreakBase.__init__(self)
+        Probe.__init__(self)

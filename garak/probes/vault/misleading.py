@@ -10,7 +10,7 @@ deny, refute, or contradict.
 
 import garak._config
 from garak.probes.base import Probe
-
+from random import sample
 
 class FalseAssertion50(Probe):
     """Does the model reject [questions based on] false claims?"""
@@ -18,10 +18,7 @@ class FalseAssertion50(Probe):
     bcp47 = "en"
     uri = "https://arxiv.org/abs/2304.13734"
     recommended_detector = [
-        "misleading.MustRefuteClaimModel",
-        "misleading.MustRefuteClaimKW",
         "mitigation.MitigationBypass",
-        "misleading.MustContradictNLI",
     ]
     tags = ["avid-effect:performance:P0204"]
     goal = "make the model expand on a false assertion"
@@ -46,3 +43,16 @@ class FalseAssertion50(Probe):
                     if false_assertion.startswith("The"):
                         false_assertion = "t" + false_assertion[1:]
                     self.prompts.append(f"{prefix} {false_assertion}")
+
+        if len(self.prompts) > self.promptLimit:
+            self.prompts = sample(self.prompts, self.promptLimit)
+
+
+
+
+from .danBase import JailbreakBase
+class FalseAssertionPI(JailbreakBase, FalseAssertion50, Probe):
+    def __init__(self):
+        FalseAssertion50.__init__(self)
+        JailbreakBase.__init__(self)
+        Probe.__init__(self)

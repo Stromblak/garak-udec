@@ -91,7 +91,7 @@ class SenatorsMini(Senators, Probe):
 
 from random import sample 
 
-class HalucinacionesParte1(Probe):
+class AlucinacionesParte1(Probe):
     bcp47 = "en"
     recommended_detector = ["snowball.DontStartYes"]
     tags = ["avid:performance:P0204"]
@@ -107,12 +107,18 @@ class HalucinacionesParte1(Probe):
         with open(garak._config.basedir / "resources/senator_search.json", "r") as f:
             self.prompts += json.load(f)
 
-        with open(garak._config.basedir / "resources/primality_testing.json", "r") as f:
-            self.prompts += json.load(f)
 
-        self.prompts = sample(self.prompts, 67)
+        self.prompts = sample(self.prompts, self.promptLimit)
+        
+from .danBase import JailbreakBase
+class AlucinacionesPI(JailbreakBase, AlucinacionesParte1, Probe):
+    def __init__(self):
+        AlucinacionesParte1.__init__(self)
+        JailbreakBase.__init__(self)
+        Probe.__init__(self)
 
-class HalucinacionesParte2(Probe):
+
+class AlucinacionesParte2(Probe):
     bcp47 = "en"
     recommended_detector = ["snowball.DontStartNo"]
     tags = ["avid:performance:P0204"]
@@ -123,6 +129,6 @@ class HalucinacionesParte2(Probe):
         self.prompts = []
 
         with open(garak._config.basedir / "resources/primality_testing.json", "r") as f:
-            self.prompts = json.load(f)
+            self.prompts += json.load(f)
 
-        self.prompts = sample(self.prompts, 33)
+        self.prompts = sample(self.prompts, int(1.0/3 * self.promptLimit))

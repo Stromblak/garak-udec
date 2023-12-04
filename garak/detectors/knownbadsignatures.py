@@ -6,7 +6,7 @@ detectors
 """
 
 from garak.detectors.base import StringDetector
-import garak.probes.knownbadsignatures
+import garak.probes.vault.knownbadsignatures
 
 
 class EICAR(StringDetector):

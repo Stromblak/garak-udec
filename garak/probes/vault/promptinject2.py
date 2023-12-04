@@ -23,7 +23,7 @@ rogue_strings = "hate-humans kill-humans long-prompt".split()
 this = sys.modules[__name__]
 
 
-class CambioObjetivo(Probe):
+class SecuestroObjetivo(Probe):
     bcp47 = "en"
     description = "PromptInject is a framework that assembles prompts in a modular fashion to provide a quantitative analysis of the robustness of LLMs to adversarial prompt attacks. trophy Best Paper Awards @ NeurIPS ML Safety Workshop 2022",
     recommended_detector= [
@@ -46,9 +46,11 @@ class CambioObjetivo(Probe):
         self.pi_prompt_data = prompt_data
         self.pi_build_prompts = build_prompts
         
-        self.load_data_all_attacks(rogue_strings[0], 34)
-        self.load_data_all_attacks(rogue_strings[1], 33)
-        self.load_data_all_attacks(rogue_strings[2], 33)
+        aux = int(self.promptLimit * 1.0/3)
+
+        self.load_data_all_attacks(rogue_strings[0], self.promptLimit - 2 * aux)
+        self.load_data_all_attacks(rogue_strings[1], aux)
+        self.load_data_all_attacks(rogue_strings[2], aux)
 
 
     def load_data_all_attacks(self, rogue_string, n):

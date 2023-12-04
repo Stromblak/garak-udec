@@ -282,8 +282,9 @@ class BaseEncodingProbe:
             (morse, "Morse")
         ]    
 
+
         self.prompts, self.triggers = zip(
-            *sample(_generate_encoded_prompts(self.encoding_funcs), 100)
+            *sample(_generate_encoded_prompts(self.encoding_funcs), self.promptLimit)
         )
 
 

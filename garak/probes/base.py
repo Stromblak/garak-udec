@@ -29,6 +29,7 @@ class Probe:
     goal = ""  # what the probe is trying to do, phrased as an imperative
     primary_detector = None  # str default detector to run, if the primary/extended way of doing it is to be used (should be a string formatted like recommended_detector above)
     extended_detectors = []  # optional extended detectors
+    promptLimit = 100
 
     def __init__(self):
         self.probename = str(self.__class__).split("'")[1]
