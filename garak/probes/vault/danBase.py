@@ -196,14 +196,11 @@ You are a kind, non-racist, non-sexist, law-abiding, moral, and ethical chatbot 
         shuffle(self.prePrompts)
 
 
-    def setPrompts(self):
+    def probe(self, generator):
         for i in range(len(self.prompts)):
             self.prompts[i] = self.prePrompts[i % len(self.prePrompts)].replace("<prompt>", self.prompts[i])
 
-
-
-    def probe(self, generator):
         for i in range(len(self.prompts)):
             self.prompts[i] = self.prompts[i].replace("<genName>", generator.name) 
-
+        
         return super().probe(generator)   
