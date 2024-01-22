@@ -1,7 +1,7 @@
 import json
 from collections import defaultdict
 
-jsonl_file_path = 'Fastchat-3B\garak.de888ede-1748-4872-8b5a-11f1d61c49e6.report.jsonl'
+jsonl_file_path = 'garak.9d7d6576-dab9-49f5-8c89-dbedbb1735cd.report.jsonl'
 
 
 
@@ -14,9 +14,6 @@ with open(jsonl_file_path, 'r') as jsonl_file:
 
 
         if json_object["entry_type"] == "attempt":
-            if json_object['probe_classname'] == "vault.misleading.FalseAssertion50":
-                continue
-
             if json_object["status"] == 2:
 
                 probe_classname = json_object['probe_classname']

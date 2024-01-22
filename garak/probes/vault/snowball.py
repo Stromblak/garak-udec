@@ -102,15 +102,20 @@ class AlucinacionesParte1(Probe):
         self.prompts = []
 
 
-        instructions = "Answer like this: 'Yes, ...' or 'No, ...'."
+        instructions2 = " There is no direct flight so you need to check if a route with multiple flights exists."
+        instructions = " You must answer like this: 'Yes, <the rest of your answer>' or 'No, <the rest of your answer>'."
+
         with open(garak._config.basedir / "resources/graph_connectivity.json", "r") as f:
-            self.prompts += json.load(f) + "There is no direct flight so you need to check if a route with multiple flights exists."
+            self.prompts += json.load(f)
+
+        for i in range(len(self.prompts)):
+            self.prompts[i] += instructions2
 
 
         with open(garak._config.basedir / "resources/senator_search.json", "r") as f:
             self.prompts += json.load(f)
 
-        for i in range(self.prompts):
+        for i in range(len(self.prompts)):
             self.prompts[i] += instructions
 
         self.prompts = sample(self.prompts, self.promptLimit)

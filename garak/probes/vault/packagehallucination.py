@@ -58,7 +58,7 @@ class Python(Probe):
                     stub_prompt.replace("<language>", "Python3") + " " + code_task
                 )
         
-        for i in range(self.prompts):
+        for i in range(len(self.prompts)):
             self.prompts[i] += instructions
 
         if len(self.prompts) > self.promptLimit:
