@@ -1,8 +1,7 @@
 import json
 from collections import defaultdict
 
-jsonl_file_path = 'garak.9d7d6576-dab9-49f5-8c89-dbedbb1735cd.report.jsonl'
-
+jsonl_file_path = 'garak.d70541c2-6ed7-431a-8e4a-debea28e9092.report.jsonl'
 
 
 tests = defaultdict(list)
@@ -11,12 +10,13 @@ with open(jsonl_file_path, 'r') as jsonl_file:
     for line in jsonl_file:
         json_object = json.loads(line)
 
-
-
         if json_object["entry_type"] == "attempt":
             if json_object["status"] == 2:
 
                 probe_classname = json_object['probe_classname']
+
+                if probe_classname != "vault.misleading.FalseAssertionPI": continue
+
                 prompt = json_object['prompt']
                 outputs = json_object['outputs'][0]
                 detector_results = int(next(iter(json_object['detector_results'].values()))[0])
@@ -38,6 +38,7 @@ for key in tests.keys():
 
 fails = []
 results = []
+
 
 for key in tests.keys():
     print()

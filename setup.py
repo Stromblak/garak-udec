@@ -8,7 +8,10 @@ setup(
 
 """
 install_requires=[
-    'dependency1',
-    'dependency2',
+    'tqdm',
+    'base2028',
+    'stdlibs',
+    'datasets',
+    'backoff',
 ]
 """
