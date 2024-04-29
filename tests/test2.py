@@ -1,6 +1,23 @@
 import re
 
 
+
+
+
+while True:
+    input_str = input("Enter the input string: ")
+    pattern = r'\b\d+\.\d+\b'  # Updated pattern to match floating-point numbers
+    numbers = re.findall(pattern, input_str)
+    numbers = [float(num) for num in numbers]
+
+    print(numbers[0], numbers[1])
+    print(numbers[0]*0.77, numbers[1]*0.44)
+
+
+
+
+
+
 while True:
     input_str = input("Enter the input string: ")
 
@@ -21,3 +38,6 @@ while True:
 
     print(TP, TN, FP, FN)
     print((TP + TN)* 100.0 / TOTAL, "%")
+
+
+    
